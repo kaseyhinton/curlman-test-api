@@ -1,6 +1,7 @@
 import Fastify from "fastify";
 import countries from "./countries.js";
 import fastifyStatic from "fastify-static";
+import fastifyCors from "fastify-cors";
 import path from "path";
 import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
@@ -10,6 +11,10 @@ console.log(path.join(__dirname, "static"));
 const fastify = Fastify({
   logger: false,
 });
+
+fastify.register(fastifyCors), {
+  origin: '*',  // Allow all origins
+};
 
 fastify.register(fastifyStatic, {
   root: path.join(__dirname, "./static"),
